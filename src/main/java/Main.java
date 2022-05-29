@@ -14,22 +14,19 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    String path = "/Users/annavoronina/IdeaProjects/pcs-jd-diplom/pdfs";
-
     public static void main(String[] args) throws Exception {
 
 
-          BooleanSearchEngine engine = new BooleanSearchEngine(new File("/Users/annavoronina/IdeaProjects/pcs-jd-diplom/pdfs"));
-        System.out.println(engine.search("бизнес"));
+//        BooleanSearchEngine engine = new BooleanSearchEngine(new File("/Users/annavoronina/IdeaProjects/pcs-jd-diplom/pdfs"));
+//        System.out.println(engine.search("бизнес"));
 
 
+          Server server = new Server(8989);
+        server.start();
 
-            //  Server server = new Server(8989);
-            //server.start();
 
-
-            // здесь создайте сервер, который отвечал бы на нужные запросы
-            // слушать он должен порт 8989
-            // отвечать на запросы /{word} -> возвращённое значение метода search(word) в JSON-формате
-        }
+        // здесь создайте сервер, который отвечал бы на нужные запросы
+        // слушать он должен порт 8989
+        // отвечать на запросы /{word} -> возвращённое значение метода search(word) в JSON-формате
     }
+}
