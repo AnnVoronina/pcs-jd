@@ -14,9 +14,8 @@ public class BooleanSearchEngine implements SearchEngine {
     public BooleanSearchEngine(File pdfsDir) throws IOException {
 
 
-
         for (File fileName : pdfsDir.listFiles()) {
-            if(!fileName.getName().endsWith("pdf")) {
+            if (!fileName.getName().endsWith("pdf")) {
                 continue;
             }
             var doc = new PdfDocument(new PdfReader(fileName));

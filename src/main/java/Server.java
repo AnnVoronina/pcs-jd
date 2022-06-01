@@ -9,10 +9,13 @@ import java.nio.file.Paths;
 
 public class Server {
     int port;
+    String path;
 
-    public Server(int port) {
+    public Server(int port, String path) {
         this.port = port;
+        this.path = path;
     }
+
 
     public void start() {
         System.out.println("Starting server at " + port);
@@ -21,15 +24,10 @@ public class Server {
             Socket socket = listener.accept();
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-
-            out.println("Enter directory");
-            String directory = in.readLine();
-            BooleanSearchEngine engine = new BooleanSearchEngine(new File(directory));
-
+            BooleanSearchEngine engine = new BooleanSearchEngine(new File(path));
             out.println("Enter word!");
             String answer = in.readLine();
-           // Files.createDirectories(Paths.get(directory));
-            FileWriter writer = new FileWriter(directory+"/результат для слова "+answer+".txt");
+            FileWriter writer = new FileWriter("/Users/annavoronina/IdeaProjects/pcs-jd/pdfs" + "/результат для слова " + answer + ".txt");
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String gsonString = gson.toJson(engine.search(answer));
             writer.write(gsonString);

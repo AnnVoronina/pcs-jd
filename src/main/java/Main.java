@@ -21,7 +21,7 @@ public class Main {
 //        System.out.println(engine.search("бизнес"));
 
 
-          Server server = new Server(8989);
+        Server server = new Server(8989, "/Users/annavoronina/IdeaProjects/pcs-jd/pdfs");
         server.start();
 
 

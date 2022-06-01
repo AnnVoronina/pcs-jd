@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Client {
     private static final String serverHost = "netology.homework";
-   // private static final String path = "/Users/annavoronina/IdeaProjects/pcs-jd-diplom/pdfs";
+    // private static final String path = "/Users/annavoronina/IdeaProjects/pcs-jd-diplom/pdfs";
 
     public static void main(String[] args) {
 
@@ -17,15 +17,9 @@ public class Client {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         ) {
-
-                System.out.println();System.out.println(in.readLine());
-                String string = reader.readLine();
-                out.println(string);
-                System.out.println(in.readLine());
-                string = reader.readLine();
-                out.println(string);
-
-
+            System.out.println(in.readLine());
+            String string = reader.readLine();
+            out.println(string);
 
 
         } catch (IOException e) {
