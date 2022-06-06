@@ -19,11 +19,11 @@ public class Server {
 
     public void start() {
         System.out.println("Starting server at " + port);
-        try {
-            ServerSocket listener = new ServerSocket(port);
+        try(ServerSocket listener = new ServerSocket(port);
             Socket socket = listener.accept();
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+            PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);  ) {
+
             BooleanSearchEngine engine = new BooleanSearchEngine(new File(path));
             out.println("Enter word!");
             String answer = in.readLine();
