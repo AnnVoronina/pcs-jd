@@ -44,5 +44,5 @@ public class Server {
             System.out.println("Server can't start");
             e.printStackTrace();
         }
-   }
+    }
 }
