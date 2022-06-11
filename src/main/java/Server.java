@@ -19,23 +19,30 @@ public class Server {
 
     public void start() {
         System.out.println("Starting server at " + port);
-        try(ServerSocket listener = new ServerSocket(port);
-            Socket socket = listener.accept();
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);  ) {
-
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
             BooleanSearchEngine engine = new BooleanSearchEngine(new File(path));
-            out.println("Enter word!");
-            String answer = in.readLine();
-            FileWriter writer = new FileWriter("/Users/annavoronina/IdeaProjects/pcs-jd/pdfs" + "/результат для слова " + answer + ".txt");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String gsonString = gson.toJson(engine.search(answer));
-            writer.write(gsonString);
-            writer.flush();
+            // стартуем сервер один(!) раз
+            while (true) { // в цикле(!) принимаем подключения
+                try (
+                        Socket socket = serverSocket.accept();
+                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+                    out.println("Enter word!");
+                    out.flush();
+                    String answer = in.readLine();
+                    FileWriter writer = new FileWriter("/Users/annavoronina/IdeaProjects/pcs-jd_diplom/pdfs" + "/результат для слова " + answer + ".txt");
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    String gsonString = gson.toJson(engine.search(answer));
+                    writer.write(gsonString);
+                    writer.flush();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (IOException e) {
+            System.out.println("Server can't start");
             e.printStackTrace();
         }
-
-
-    }
+   }
 }
