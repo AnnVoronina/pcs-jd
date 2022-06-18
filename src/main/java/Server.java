@@ -30,7 +30,7 @@ public class Server {
                     out.println("Enter word!");
                     out.flush();
                     String answer = in.readLine();
-                    FileWriter writer = new FileWriter("/Users/annavoronina/IdeaProjects/pcs-jd_diplom/pdfs" + "/результат для слова " + answer + ".txt");
+                    FileWriter writer = new FileWriter(path + "/результат для слова " + answer + ".txt");
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     String gsonString = gson.toJson(engine.search(answer));
                     writer.write(gsonString);
